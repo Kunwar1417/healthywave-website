@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/desk/:path*",
+      "destination": "https://healthywave-desk.fly.dev/:path*"
+    }
+  ]
+}
