@@ -542,8 +542,7 @@ footer.site { background: var(--ink); color: var(--ivory); padding: 64px 0 24px;
   transition: border-color .15s, background .15s;
 }
 .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--sage); background: #fff; }
-.field-row { display: grid; gap: 16px; grid-template-columns: 1fr; }
-@media (min-width: 600px) { .field-row { grid-template-columns: 1fr 1fr; } }
+.field-row { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
 .form-card button[type="submit"] {
   width: 100%; margin-top: 6px;
   padding: 16px; font-size: 15px; font-weight: 600;
