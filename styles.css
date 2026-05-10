@@ -516,7 +516,8 @@ footer.site { background: var(--ink); color: var(--ivory); padding: 64px 0 24px;
 
 /* CONTACT */
 .contact-grid { display: grid; gap: 36px; grid-template-columns: 1fr; }
-@media (min-width: 960px) { .contact-grid { grid-template-columns: 1fr 1fr; gap: 56px; } }
+.contact-grid .form-card { order: -1; }
+@media (min-width: 960px) { .contact-grid { grid-template-columns: 1fr 1fr; gap: 56px; } .contact-grid .form-card { order: 0; } }
 .info-card { background: var(--paper); border: 1px solid var(--line); border-radius: 22px; padding: 28px; display: flex; flex-direction: column; gap: 18px; }
 .info-row { display: flex; gap: 14px; align-items: flex-start; }
 .info-row .glyph { width: 38px; height: 38px; border-radius: 10px; background: var(--ivory-2); display: inline-flex; align-items: center; justify-content: center; flex: none; color: var(--sage-deep); }

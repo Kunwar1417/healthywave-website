@@ -100,8 +100,8 @@ function gtag_report_conversion(url) {
       </div>
 
       <div class="form-card" id="form">
-        <h3>Send Us an Inquiry</h3>
-        <p class="subtle">Fill the form below and our team will get in touch with you shortly.</p>
+        <h3>Book an Appointment</h3>
+        <p class="subtle">Fill the form below and our team will call you to confirm your appointment.</p>
         <form id="inquiry" novalidate>
           <div class="field"><label for="name">Full Name</label><input id="name" name="name" type="text" placeholder="Your full name" required /></div>
           <div class="field-row">
@@ -111,7 +111,7 @@ function gtag_report_conversion(url) {
           <div class="field">
             <label for="concern">Your Skin Concern / Service of Interest</label>
             <select id="concern" name="concern">
-              <option>I'm not sure &ndash; I'd like a consultation</option>
+              <option>Not sure &ndash; I want a general checkup</option>
               <option>Acne and Pimples</option>
               <option>Scars and Blemishes</option>
               <option>Melasma and Dark Patches</option>
@@ -138,7 +138,7 @@ function gtag_report_conversion(url) {
             </div>
           </div>
           <div class="field"><label for="message">Message (Optional)</label><textarea id="message" name="message" rows="4" placeholder="Tell us a little about your concern&hellip;"></textarea></div>
-          <button type="submit">Submit Inquiry &rarr;</button>
+          <button type="submit">Book Appointment &rarr;</button>
           <p class="reassure">Your details are kept confidential. We will never share or sell your information.</p>
           <div class="form-success" id="success" style="display:none;">Thank you &ndash; we have received your inquiry. Our team will get in touch within one business day.</div>
         </form>
@@ -219,12 +219,12 @@ function gtag_report_conversion(url) {
         document.getElementById('success').style.display = 'block';
         f.reset();
         btn.disabled = false;
-        btn.textContent = 'Submit Inquiry →';
+        btn.textContent = 'Book Appointment →';
       })
       .catch(() => {
         alert('Something went wrong. Please call us at +91 96285 91786.');
         btn.disabled = false;
-        btn.textContent = 'Submit Inquiry →';
+        btn.textContent = 'Book Appointment →';
       });
   });
 </script>
