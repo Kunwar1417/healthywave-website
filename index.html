@@ -351,5 +351,13 @@ src="https://www.facebook.com/tr?id=1320370983523763&ev=PageView&noscript=1"
   const mn = document.getElementById('mobileNav');
   if (mb) mb.addEventListener('click', () => mn.classList.toggle('open'));
 </script>
+<script>
+  document.querySelectorAll('a[href^="tel:"]').forEach(function(el) {
+    el.addEventListener('click', function() { fbq('track', 'Contact'); });
+  });
+  document.querySelectorAll('a.btn[href*="contact"]').forEach(function(el) {
+    el.addEventListener('click', function() { fbq('track', 'InitiateCheckout'); });
+  });
+</script>
 </body>
 </html>

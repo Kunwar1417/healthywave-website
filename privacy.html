@@ -180,5 +180,10 @@ src="https://www.facebook.com/tr?id=1320370983523763&ev=PageView&noscript=1"
   const mb=document.getElementById('menuBtn'); const mn=document.getElementById('mobileNav');
   if(mb) mb.addEventListener('click', ()=>mn.classList.toggle('open'));
 </script>
+<script>
+  document.querySelectorAll('a[href^="tel:"]').forEach(function(el) {
+    el.addEventListener('click', function() { fbq('track', 'Contact'); });
+  });
+</script>
 </body>
 </html>
