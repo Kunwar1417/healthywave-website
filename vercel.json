@@ -1,5 +1,16 @@
 {
+  "redirects": [
+    {
+      "source": "/desk",
+      "destination": "/desk/",
+      "permanent": false
+    }
+  ],
   "rewrites": [
+    {
+      "source": "/desk/",
+      "destination": "https://healthywave-desk.fly.dev/"
+    },
     {
       "source": "/desk/:path*",
       "destination": "https://healthywave-desk.fly.dev/:path*"
