@@ -9,6 +9,22 @@
   gtag('js', new Date());
   gtag('config', 'AW-16514287301');
 </script>
+<script>
+function gtag_report_conversion(url) {
+  var callback = function () {
+    if (typeof(url) != 'undefined') {
+      window.location = url;
+    }
+  };
+  gtag('event', 'conversion', {
+      'send_to': 'AW-16514287301/3YUGCIzWwaocEMWN0MI9',
+      'value': 1.0,
+      'currency': 'INR',
+      'event_callback': callback
+  });
+  return false;
+}
+</script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Terms of Service &ndash; Healthy Wave Skin and Aesthetic Clinic</title>
@@ -26,14 +42,14 @@
       <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a href="contact.html">Contact</a>
     </nav>
     <div class="nav-cta">
-      <a href="tel:+919628591786" class="nav-tel">+91 96285 91786</a>
+      <a href="tel:+919628591786" onclick="return gtag_report_conversion('tel:+919628591786');" class="nav-tel">+91 96285 91786</a>
       <a href="contact.html" class="btn btn-primary">Book an Appointment</a>
       <button class="menu-btn" aria-label="Menu" id="menuBtn"><span></span></button>
     </div>
   </div>
   <div class="mobile-nav" id="mobileNav">
     <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a href="contact.html">Contact</a>
-    <a href="tel:+919628591786">Call +91 96285 91786</a>
+    <a href="tel:+919628591786" onclick="return gtag_report_conversion('tel:+919628591786');">Call +91 96285 91786</a>
   </div>
 </header>
 
@@ -110,7 +126,7 @@
       <h2>10. Contact</h2>
       <p>If you have questions or concerns regarding these Terms, please contact us at:</p>
       <p>Healthy Wave Skin and Aesthetic Clinic<br/>
-      <a href="tel:+919628591786">+91 96285 91786</a><br/>
+      <a href="tel:+919628591786" onclick="return gtag_report_conversion('tel:+919628591786');">+91 96285 91786</a><br/>
       <a href="mailto:hwskinclinic@gmail.com">hwskinclinic@gmail.com</a><br/>
       Near Bareilly Point Marriage Lawn, Ejas Nagar, Pilibhit Bypass Road, Bareilly 243006, Uttar Pradesh</p>
     </div>
@@ -123,11 +139,11 @@
       <div class="foot-brand">
         <a href="index.html" class="brand"><img src="assets/logo.png" alt="Healthy Wave" class="brand-logo invert" /></a>
         <p>Skin and Aesthetic Clinic, Bareilly. Medical-grade dermatological and cosmetic care led by Dr. Aman Jeet Handa.</p>
-        <p style="margin-top:18px;">Near Bareilly Point Marriage Lawn, Ejas Nagar, Pilibhit Bypass Road, Bareilly 243006, Uttar Pradesh<br/><a href="tel:+919628591786">+91 96285 91786</a><br/><a href="mailto:hwskinclinic@gmail.com">hwskinclinic@gmail.com</a></p>
+        <p style="margin-top:18px;">Near Bareilly Point Marriage Lawn, Ejas Nagar, Pilibhit Bypass Road, Bareilly 243006, Uttar Pradesh<br/><a href="tel:+919628591786" onclick="return gtag_report_conversion('tel:+919628591786');">+91 96285 91786</a><br/><a href="mailto:hwskinclinic@gmail.com">hwskinclinic@gmail.com</a></p>
       </div>
       <div class="foot-col"><h5>Quick Links</h5><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="contact.html">Contact Us</a></li></ul></div>
       <div class="foot-col"><h5>Legal</h5><ul><li><a href="privacy.html">Privacy Policy</a></li><li><a href="terms.html">Terms of Service</a></li><li><a href="disclaimer.html">Disclaimer</a></li></ul></div>
-      <div class="foot-col"><h5>Connect</h5><ul><li><a href="https://www.instagram.com/dr.amanhanda?igsh=d2s3ZjltNW51aDdw" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://maps.app.goo.gl/EHdA8AAKt6Xb3LMh7?g_st=ic" target="_blank" rel="noopener">Google Maps</a></li><li><a href="tel:+919628591786">+91 96285 91786</a></li></ul></div>
+      <div class="foot-col"><h5>Connect</h5><ul><li><a href="https://www.instagram.com/dr.amanhanda?igsh=d2s3ZjltNW51aDdw" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://maps.app.goo.gl/EHdA8AAKt6Xb3LMh7?g_st=ic" target="_blank" rel="noopener">Google Maps</a></li><li><a href="tel:+919628591786" onclick="return gtag_report_conversion('tel:+919628591786');">+91 96285 91786</a></li></ul></div>
     </div>
     <div class="foot-bottom"><span>&copy; 2025 Healthy Wave Skin and Aesthetic Clinic. All rights reserved.</span><span>This website is for informational purposes only and does not constitute medical advice.</span></div>
   </div>

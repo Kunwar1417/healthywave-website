@@ -9,6 +9,22 @@
   gtag('js', new Date());
   gtag('config', 'AW-16514287301');
 </script>
+<script>
+function gtag_report_conversion(url) {
+  var callback = function () {
+    if (typeof(url) != 'undefined') {
+      window.location = url;
+    }
+  };
+  gtag('event', 'conversion', {
+      'send_to': 'AW-16514287301/3YUGCIzWwaocEMWN0MI9',
+      'value': 1.0,
+      'currency': 'INR',
+      'event_callback': callback
+  });
+  return false;
+}
+</script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Healthy Wave Skin and Aesthetic Clinic &ndash; Bareilly | Dr. Aman Jeet Handa</title>
@@ -30,7 +46,7 @@
       <a href="contact.html">Contact</a>
     </nav>
     <div class="nav-cta">
-      <a href="tel:+919628591786" class="nav-tel">+91 96285 91786</a>
+      <a href="tel:+919628591786" onclick="return gtag_report_conversion('tel:+919628591786');" class="nav-tel">+91 96285 91786</a>
       <a href="contact.html" class="btn btn-primary">Book an Appointment</a>
       <button class="menu-btn" aria-label="Menu" id="menuBtn"><span></span></button>
     </div>
@@ -40,7 +56,7 @@
     <a href="about.html">About</a>
     <a href="services.html">Services</a>
     <a href="contact.html">Contact</a>
-    <a href="tel:+919628591786">Call +91 96285 91786</a>
+    <a href="tel:+919628591786" onclick="return gtag_report_conversion('tel:+919628591786');">Call +91 96285 91786</a>
   </div>
 </header>
 
@@ -53,7 +69,7 @@
         <p class="lead">Expert dermatological and cosmetic treatments by Dr. Aman Jeet Handa &ndash; 14 years of experience, medically proven results, personalized for every skin type.</p>
         <div class="hero-ctas">
           <a href="contact.html" class="btn btn-primary">Book an Appointment <span class="arrow">&rarr;</span></a>
-          <span class="hero-call">or call us directly: <a href="tel:+919628591786">+91 96285 91786</a></span>
+          <span class="hero-call">or call us directly: <a href="tel:+919628591786" onclick="return gtag_report_conversion('tel:+919628591786');">+91 96285 91786</a></span>
         </div>
         <div class="hero-trust">No obligations. Just honest advice from a qualified doctor.</div>
       </div>
@@ -266,7 +282,7 @@
       <p>Book an appointment with Dr. Aman Jeet Handa today and get a personalized skin assessment &ndash; no commitment required.</p>
       <div class="ctas">
         <a href="contact.html" class="btn btn-light">Book an Appointment <span class="arrow">&rarr;</span></a>
-        <a href="tel:+919628591786" class="btn" style="background:transparent; color:#fff; border:1px solid rgba(255,255,255,.6);">Call Us Now: +91 96285 91786</a>
+        <a href="tel:+919628591786" onclick="return gtag_report_conversion('tel:+919628591786');" class="btn" style="background:transparent; color:#fff; border:1px solid rgba(255,255,255,.6);">Call Us Now: +91 96285 91786</a>
       </div>
     </div>
   </div>
@@ -278,7 +294,7 @@
       <div class="foot-brand">
         <a href="index.html" class="brand"><img src="assets/logo.png" alt="Healthy Wave" class="brand-logo invert" /></a>
         <p>Skin and Aesthetic Clinic, Bareilly. Medical-grade dermatological and cosmetic care led by Dr. Aman Jeet Handa.</p>
-        <p style="margin-top:18px;">Near Bareilly Point Marriage Lawn, Ejas Nagar, Pilibhit Bypass Road, Bareilly 243006, Uttar Pradesh<br/><a href="tel:+919628591786">+91 96285 91786</a><br/><a href="mailto:hwskinclinic@gmail.com">hwskinclinic@gmail.com</a></p>
+        <p style="margin-top:18px;">Near Bareilly Point Marriage Lawn, Ejas Nagar, Pilibhit Bypass Road, Bareilly 243006, Uttar Pradesh<br/><a href="tel:+919628591786" onclick="return gtag_report_conversion('tel:+919628591786');">+91 96285 91786</a><br/><a href="mailto:hwskinclinic@gmail.com">hwskinclinic@gmail.com</a></p>
       </div>
       <div class="foot-col">
         <h5>Quick Links</h5>
@@ -302,7 +318,7 @@
         <ul>
           <li><a href="https://www.instagram.com/dr.amanhanda?igsh=d2s3ZjltNW51aDdw" target="_blank" rel="noopener">Instagram</a></li>
           <li><a href="https://maps.app.goo.gl/EHdA8AAKt6Xb3LMh7?g_st=ic" target="_blank" rel="noopener">Google Maps &rarr; Get Directions</a></li>
-          <li><a href="tel:+919628591786">+91 96285 91786</a></li>
+          <li><a href="tel:+919628591786" onclick="return gtag_report_conversion('tel:+919628591786');">+91 96285 91786</a></li>
         </ul>
       </div>
     </div>
