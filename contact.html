@@ -126,6 +126,17 @@ function gtag_report_conversion(url) {
               <option>Other</option>
             </select>
           </div>
+          <div class="field-row">
+            <div class="field"><label for="appt-date">Preferred Date</label><input id="appt-date" name="appt_date" type="date" /></div>
+            <div class="field">
+              <label for="appt-time">Preferred Time Slot</label>
+              <select id="appt-time" name="appt_time">
+                <option value="">No preference</option>
+                <option value="Morning (10 AM – 1 PM)">Morning (10 AM &ndash; 1 PM)</option>
+                <option value="Evening (6 PM – 8:30 PM)">Evening (6 PM &ndash; 8:30 PM)</option>
+              </select>
+            </div>
+          </div>
           <div class="field"><label for="message">Message (Optional)</label><textarea id="message" name="message" rows="4" placeholder="Tell us a little about your concern&hellip;"></textarea></div>
           <button type="submit">Submit Inquiry &rarr;</button>
           <p class="reassure">Your details are kept confidential. We will never share or sell your information.</p>
@@ -168,16 +179,53 @@ function gtag_report_conversion(url) {
 </footer>
 
 <script>
-  const mb=document.getElementById('menuBtn'); const mn=document.getElementById('mobileNav');
-  if(mb) mb.addEventListener('click', ()=>mn.classList.toggle('open'));
+  const FORM_URL = 'https://script.google.com/macros/s/AKfycbwsPuU0k4S278_Ehn_2zNZawsVcNySBeF67vdazLJFr1PIWJwxpQey0YQBjhkZP3pkRqA/exec';
+
+  const mb = document.getElementById('menuBtn');
+  const mn = document.getElementById('mobileNav');
+  if (mb) mb.addEventListener('click', () => mn.classList.toggle('open'));
+
+  const apptDate = document.getElementById('appt-date');
+  if (apptDate) apptDate.min = new Date().toISOString().split('T')[0];
+
   const f = document.getElementById('inquiry');
   if (f) f.addEventListener('submit', (e) => {
     e.preventDefault();
     const name = document.getElementById('name').value.trim();
     const phone = document.getElementById('phone').value.trim();
     if (!name || !phone) { alert('Please share your name and phone number so we can reach you.'); return; }
-    document.getElementById('success').style.display = 'block';
-    f.reset();
+
+    const btn = f.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    const payload = {
+      name,
+      phone,
+      email: document.getElementById('email').value.trim(),
+      concern: document.getElementById('concern').value,
+      appt_date: document.getElementById('appt-date').value,
+      appt_time: document.getElementById('appt-time').value,
+      message: document.getElementById('message').value.trim(),
+    };
+
+    fetch(FORM_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify(payload),
+    })
+      .then(() => {
+        document.getElementById('success').style.display = 'block';
+        f.reset();
+        btn.disabled = false;
+        btn.textContent = 'Submit Inquiry →';
+      })
+      .catch(() => {
+        alert('Something went wrong. Please call us at +91 96285 91786.');
+        btn.disabled = false;
+        btn.textContent = 'Submit Inquiry →';
+      });
   });
 </script>
 </body>
