@@ -543,8 +543,8 @@ footer.site { background: var(--ink); color: var(--ivory); padding: 64px 0 24px;
 }
 .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--sage); background: #fff; }
 .field-row { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
-.field-row > .field { min-width: 0; }
-.field-row input, .field-row select { min-width: 0; width: 100%; box-sizing: border-box; }
+.field-row > .field { min-width: 0; overflow: hidden; }
+.field-row input, .field-row select { min-width: 0; width: 100%; max-width: 100%; box-sizing: border-box; }
 .form-card button[type="submit"] {
   width: 100%; margin-top: 6px;
   padding: 16px; font-size: 15px; font-weight: 600;
