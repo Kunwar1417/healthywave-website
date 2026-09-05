@@ -77,34 +77,18 @@ Primary audience: Women in Bareilly and nearby cities (Pilibhit, Shahjahanpur, R
 - On book.html, `fbq('track', 'Lead')` and `gtag_report_conversion()` fire in `succeed()` after a booking is saved.
 
 ### Booking Page (book.html → /book)  ← PRIMARY CONVERSION PAGE
-- Live at `https://www.thehealthywave.in/book` (`vercel.json` rewrites `/book` → `/book.html`)
-- Mobile-first single page: date strip → time slots → details. No libraries, inline JS.
-- **Bookings land directly in the HealthyWave Desk app's `Appointments` tab** with `Source = website`
-- Slots are 30-minute, **11:00–13:30 and 18:00–20:30**, Sunday closed.
-  These MUST stay in step with `MORNING_SLOTS`/`EVENING_SLOTS` in the desk app's `api/intake.py`.
-- Booked slots grey out live. The desk books on a 15-min grid, so a public 30-min slot
-  is blocked when any staff booking falls inside its half hour (11:15 blocks the 11:00 pill).
+**→ Full detail in [`docs/booking-system.md`](docs/booking-system.md). Read it before
+touching `book.html`, `api/*.mjs`, or the slot times.**
 
-**Never let the browser call the desk API directly.** That API has no auth and
-`allow_origins=["*"]`, and the same origin also serves the full patient list. Two Vercel
-serverless functions sit in between and hold the shared secret:
-
-| File | Route | Does |
-|---|---|---|
-| `api/_shared.mjs` | — | Config, phone/date validation, rate limiter, `fetch` timeout |
-| `api/availability.mjs` | `GET /api/availability?date=` | Blocked slots for a date. 45s cache — this is the Google Sheets quota guard. Returns times only, never patient data. |
-| `api/book.mjs` | `POST /api/book` | Validates, forwards with `X-Intake-Key`. Falls back to the old Apps Script if the desk is down (`synced:false` → page says "we'll call you to confirm" rather than claiming a slot). |
-
-- `.mjs` on purpose: with no `package.json`, Vercel treats `.js` as CommonJS and the ESM breaks.
-- Files in `api/` starting with `_` are helpers, not routes.
-- **Env var `INTAKE_KEY`** (Vercel) must equal **`WEBSITE_INTAKE_KEY`** (Fly secret on
-  `healthywave-desk`). Set both; never commit either.
-- Spam controls: hidden `company` honeypot, minimum time-on-page, per-IP rate limit.
-
-### Legacy Apps Script
-- `https://script.google.com/macros/s/AKfycbzHN5xUGi-fOuSx8cQW9Xd6wvqNgS2rLAexj9IvJnbwdgpmwKfXcxO9RxSrVUBQvD-mtA/exec`
-- No longer the booking path — **fallback only**, used by `api/book.mjs` when the desk is unreachable.
-- Staff work out of the desk app, not this sheet.
+- Bookings write straight into the desk app's `Appointments` tab (`Source = "website"`)
+- Two Vercel serverless functions (`api/book.mjs`, `api/availability.mjs`) hold a shared
+  secret and stand between the browser and the desk API — **the browser must never call
+  the desk directly**; that API has no auth and also serves the full patient list
+- Vercel `INTAKE_KEY` must equal Fly `WEBSITE_INTAKE_KEY`, or every booking 401s
+- Slots are 30-min, 11:00–13:30 and 18:00–20:30, Sunday closed. The list is duplicated in
+  three files (`book.html`, `api/_shared.mjs`, desk `api/intake.py`) — change all three
+- The three testimonials are written examples, not real patients (owner's decision).
+  The 5.0 / 36 Google reviews rating is real.
 
 ### Other
 - **Fonts:** Google Fonts — Inter + JetBrains Mono
@@ -123,15 +107,15 @@ serverless functions sit in between and hold the shared secret:
 ## Deployment Workflow
 
 ```bash
-# 1. Make changes to HTML/CSS files
-# 2. Commit
-git add <files>
-git commit -m "description"
-git push origin main          # updates GitHub (but does NOT redeploy Vercel)
-
-# 3. Deploy to production
-npx vercel --prod             # this is the step that actually goes live
+git add <files> && git commit -m "description"
+git push origin main               # updates GitHub — does NOT deploy
+npx vercel deploy --prod --yes     # this is the step that goes live
 ```
+
+`npx vercel --prod` prompts and does nothing non-interactively; use
+`vercel deploy --prod --yes`. If the booking page or the desk API changed, follow
+the ordered runbook in [`docs/booking-system.md`](docs/booking-system.md) instead —
+sheet migration and the Fly deploy have to happen first.
 
 ---
 
@@ -139,24 +123,35 @@ npx vercel --prod             # this is the step that actually goes live
 
 Dermabrasion, Ultrasonic Therapy, Galvanics, HIFU, Dermasonic, Hydrafacial,
 Laser Removal of Skin Tags and Moles.
-Each service card on services.html links to contact.html.
+Each service card on services.html links to `/book`.
 
 ---
 
 ## Design Notes
 
-- Color variables defined in `styles.css` (uses CSS custom properties)
-- Key classes: `.btn`, `.btn-primary`, `.btn-terra`, `.btn-light`, `.link`
+- **Palette** (tokens at the top of `styles.css`): white ground, near-black text, two
+  accents with distinct jobs — `--sage` `#16775c` brand green for actions and structure,
+  `--terra` `#d2694a` warm coral for headline emphasis. Large dark surfaces (stats band,
+  footer, about-quote) use `--deep` `#123f33`, **not** near-black; three slabs of black is
+  what made the site read as dead. Tints: `--cream` mint, `--rose` blush.
+- Key classes: `.btn`, `.btn-primary` (green), `.btn-terra` (coral), `.btn-light`, `.link`
 - Mobile nav toggled by `#menuBtn` → adds `.open` class to `#mobileNav`
-- All "Book an Appointment" CTAs are `<a>` tags linking to `contact.html` (not `<button>`)
-- Form date field has `min` set to today's date via JS on page load
+- All "Book an Appointment" CTAs are `<a>` tags pointing at `/book` (not `<button>`)
+- `book.html` scopes its own tokens under `body.book-page, .book-page` — see the gotchas
+  in [`docs/booking-system.md`](docs/booking-system.md)
+- No browser in the agent environment; render with `qlmanage -t -s 1000 -o /tmp/out <file>.html`
+  before shipping visual changes (it runs no JS — see the doc)
 
 ---
 
 ## What NOT to Change Without Care
 
 - `INTAKE_KEY` / `WEBSITE_INTAKE_KEY` must match, or every website booking 401s
-- The slot list in `book.html` must match `api/intake.py` in the desk app
+- The slot list is duplicated in `book.html`, `api/_shared.mjs` and the desk's `api/intake.py`
+- `gtag_report_conversion()` must NOT return false — cancelling a `tel:` click breaks
+  calling from the Instagram in-app browser
+- The booking proxy timeout (22s) must stay well above 10s; a desk write takes ~9s
+- Files in `api/` are `.mjs` on purpose — `.js` would be treated as CommonJS
 - The Meta Pixel ID `1227039256008469` — tied to the live Facebook Ads account
 - The Google Ads tag `AW-16514287301` — tied to active Google Ads campaigns
 - `vercel.json` rewrites — removing them breaks the /desk backend proxy

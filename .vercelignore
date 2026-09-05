@@ -1,0 +1,10 @@
+# Internal engineering notes — must never be served from the clinic's domain.
+# CLAUDE.md was publicly readable at /CLAUDE.md until Sep 2026; docs/ describes
+# the desk API's auth posture, which is not something to publish.
+CLAUDE.md
+docs
+
+# Local scratch
+*.backup.css
+.env
+.env.*
