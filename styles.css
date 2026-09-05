@@ -875,6 +875,13 @@ body.book-page,
   border-radius: 10px; font-size: 15px; font-weight: 600;
 }
 .done-go { background: var(--accent); color: #fff; }
+/* WhatsApp brand green so it reads as "this opens WhatsApp". First action on
+   the success card: it is how most patients will keep a record of the booking. */
+.done-wa {
+  background: #25D366; color: #fff;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+}
+.done-wa svg { width: 18px; height: 18px; }
 .done-call { border: 1px solid var(--hair); color: var(--ink); }
 .done-foot { margin: 16px 0 0; font-size: 12px; color: var(--muted); line-height: 1.5; }
 .done-foot a { color: var(--accent); font-weight: 600; }
