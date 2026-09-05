@@ -19,5 +19,10 @@
       "source": "/desk/:path*",
       "destination": "https://healthywave-desk.fly.dev/:path*"
     }
-  ]
+  ],
+  "functions": {
+    "api/book.mjs": {
+      "maxDuration": 30
+    }
+  }
 }

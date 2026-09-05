@@ -64,11 +64,13 @@ export default async function handler(req, res) {
   };
 
   try {
+    // 22s, not the 6s default: a booking write is several Sheets round-trips
+    // and aborting early does not undo the row the desk has already written.
     const r = await fetchWithTimeout(`${DESK_BASE}/appointments`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'X-Intake-Key': INTAKE_KEY },
       body: JSON.stringify(payload),
-    });
+    }, 22000);
 
     if (r.ok) {
       const data = await r.json();
