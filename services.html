@@ -11,18 +11,24 @@
 </script>
 <script>
 function gtag_report_conversion(url) {
-  var callback = function () {
-    if (typeof(url) != 'undefined') {
-      window.location = url;
-    }
-  };
-  gtag('event', 'conversion', {
-      'send_to': 'AW-16514287301/3YUGCIzWwaocEMWN0MI9',
-      'value': 1.0,
-      'currency': 'INR',
-      'event_callback': callback
-  });
-  return false;
+  // Fires the Google Ads conversion WITHOUT cancelling the click.
+  //
+  // This used to return false and then navigate with window.location = url.
+  // Inside the Instagram and Facebook in-app browsers a scripted navigation
+  // to a tel: URL is refused — the user sees "Link cannot be loaded" and the
+  // browser closes — while a plain anchor click is handed to the dialer
+  // normally. So we let the <a href="tel:..."> do its own job and only
+  // record the conversion here. `url` is kept for signature compatibility
+  // and deliberately unused. tel: does not unload the page, so the beacon
+  // still goes out.
+  try {
+    gtag('event', 'conversion', {
+        'send_to': 'AW-16514287301/3YUGCIzWwaocEMWN0MI9',
+        'value': 1.0,
+        'currency': 'INR'
+    });
+  } catch (e) {}
+  return true;
 }
 </script>
 <meta charset="UTF-8" />
