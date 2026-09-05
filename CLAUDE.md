@@ -2,7 +2,7 @@
 
 ## What This Is
 Static HTML/CSS website for **Healthy Wave Skin and Aesthetic Clinic**, Bareilly, UP, India.
-Doctor: **Dr. Aman Jeet Handa** — BMS, specialization in cosmetology, 14 years experience.
+Doctor: **Dr. Aman Jeet Handa** — BAMS, FMC (Fellowship in Medical Cosmetology), 14 years experience.
 Primary audience: Women in Bareilly and nearby cities (Pilibhit, Shahjahanpur, Rampur, Moradabad).
 
 ---
@@ -27,7 +27,8 @@ Primary audience: Women in Bareilly and nearby cities (Pilibhit, Shahjahanpur, R
 ├── index.html          # Homepage — hero, services overview, trust section, FAQ, CTA
 ├── about.html          # Dr. Handa's background and clinic story
 ├── services.html       # Full services list (Dermabrasion, HIFU, Hydrafacial, etc.)
-├── contact.html        # Booking form + contact info (PRIMARY CONVERSION PAGE)
+├── book.html           # Appointment booking (PRIMARY CONVERSION PAGE, served at /book)
+├── contact.html        # Address, map, hours — links to /book
 ├── privacy.html        # Privacy policy
 ├── terms.html          # Terms of service
 ├── disclaimer.html     # Medical disclaimer
@@ -35,7 +36,8 @@ Primary audience: Women in Bareilly and nearby cities (Pilibhit, Shahjahanpur, R
 ├── vercel.json         # Vercel config — rewrites /desk/* to fly.dev backend
 └── assets/
     ├── logo.png
-    ├── dr-handa.png
+    ├── dr-handa.png          # 6MB original — never reference this on a page
+    ├── dr-handa-avatar.jpg   # 13KB 320px square crop, used by book.html
     └── clinic-interior.jpg
 ```
 
@@ -67,20 +69,42 @@ Primary audience: Women in Bareilly and nearby cities (Pilibhit, Shahjahanpur, R
 |---|---|---|
 | `PageView` | Page load | All 7 |
 | `ViewContent` | Page load | services.html only |
-| `InitiateCheckout` | "Book an Appointment" CTA click | index, about, services, contact |
+| `InitiateCheckout` | Booking page load / CTA click | index, about, services, contact, book |
 | `Contact` | Phone number (`tel:`) click | All 7 |
-| `Lead` | Booking form submitted successfully | contact.html only |
+| `Lead` | Booking submitted successfully | book.html only |
 
 - Event tracking script is a `<script>` block before `</body>` using `querySelectorAll` listeners.
-- On contact.html, `fbq('track', 'Lead')` fires inside the fetch `.then()` callback on form success.
+- On book.html, `fbq('track', 'Lead')` and `gtag_report_conversion()` fire in `succeed()` after a booking is saved.
 
-### Booking Form (contact.html)
-- Form ID: `#inquiry`
-- Submits via `fetch()` with `mode: 'no-cors'` to Google Apps Script
-- Apps Script URL: `https://script.google.com/macros/s/AKfycbzHN5xUGi-fOuSx8cQW9Xd6wvqNgS2rLAexj9IvJnbwdgpmwKfXcxO9RxSrVUBQvD-mtA/exec`
-- Fields: name, phone, email, concern (dropdown), appt_date, appt_time, message
-- On success: shows `#success` div, fires `fbq('track', 'Lead')`, resets form
-- On failure: shows alert with phone number
+### Booking Page (book.html → /book)  ← PRIMARY CONVERSION PAGE
+- Live at `https://www.thehealthywave.in/book` (`vercel.json` rewrites `/book` → `/book.html`)
+- Mobile-first single page: date strip → time slots → details. No libraries, inline JS.
+- **Bookings land directly in the HealthyWave Desk app's `Appointments` tab** with `Source = website`
+- Slots are 30-minute, **11:00–13:30 and 18:00–20:30**, Sunday closed.
+  These MUST stay in step with `MORNING_SLOTS`/`EVENING_SLOTS` in the desk app's `api/intake.py`.
+- Booked slots grey out live. The desk books on a 15-min grid, so a public 30-min slot
+  is blocked when any staff booking falls inside its half hour (11:15 blocks the 11:00 pill).
+
+**Never let the browser call the desk API directly.** That API has no auth and
+`allow_origins=["*"]`, and the same origin also serves the full patient list. Two Vercel
+serverless functions sit in between and hold the shared secret:
+
+| File | Route | Does |
+|---|---|---|
+| `api/_shared.mjs` | — | Config, phone/date validation, rate limiter, `fetch` timeout |
+| `api/availability.mjs` | `GET /api/availability?date=` | Blocked slots for a date. 45s cache — this is the Google Sheets quota guard. Returns times only, never patient data. |
+| `api/book.mjs` | `POST /api/book` | Validates, forwards with `X-Intake-Key`. Falls back to the old Apps Script if the desk is down (`synced:false` → page says "we'll call you to confirm" rather than claiming a slot). |
+
+- `.mjs` on purpose: with no `package.json`, Vercel treats `.js` as CommonJS and the ESM breaks.
+- Files in `api/` starting with `_` are helpers, not routes.
+- **Env var `INTAKE_KEY`** (Vercel) must equal **`WEBSITE_INTAKE_KEY`** (Fly secret on
+  `healthywave-desk`). Set both; never commit either.
+- Spam controls: hidden `company` honeypot, minimum time-on-page, per-IP rate limit.
+
+### Legacy Apps Script
+- `https://script.google.com/macros/s/AKfycbzHN5xUGi-fOuSx8cQW9Xd6wvqNgS2rLAexj9IvJnbwdgpmwKfXcxO9RxSrVUBQvD-mtA/exec`
+- No longer the booking path — **fallback only**, used by `api/book.mjs` when the desk is unreachable.
+- Staff work out of the desk app, not this sheet.
 
 ### Other
 - **Fonts:** Google Fonts — Inter + JetBrains Mono
@@ -131,7 +155,8 @@ Each service card on services.html links to contact.html.
 
 ## What NOT to Change Without Care
 
-- The Apps Script URL in contact.html — changing it breaks the booking form
+- `INTAKE_KEY` / `WEBSITE_INTAKE_KEY` must match, or every website booking 401s
+- The slot list in `book.html` must match `api/intake.py` in the desk app
 - The Meta Pixel ID `1227039256008469` — tied to the live Facebook Ads account
 - The Google Ads tag `AW-16514287301` — tied to active Google Ads campaigns
 - `vercel.json` rewrites — removing them breaks the /desk backend proxy

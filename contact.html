@@ -28,7 +28,17 @@ function gtag_report_conversion(url) {
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Contact Us &ndash; Healthy Wave Skin and Aesthetic Clinic, Bareilly</title>
-<meta name="description" content="Book an appointment at Healthy Wave Skin and Aesthetic Clinic, Bareilly. Address, phone, email, hours, and inquiry form." />
+<meta name="description" content="Book an appointment at Healthy Wave Skin and Aesthetic Clinic, Bareilly. Address, phone, email, clinic hours and directions." />
+<link rel="canonical" href="https://www.thehealthywave.in/contact.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Healthy Wave Skin and Aesthetic Clinic" />
+<meta property="og:url" content="https://www.thehealthywave.in/contact.html" />
+<meta property="og:title" content="Contact Us – Healthy Wave Skin and Aesthetic Clinic, Bareilly" />
+<meta property="og:description" content="Book an appointment at Healthy Wave Skin and Aesthetic Clinic, Bareilly. Address, phone, email, clinic hours and directions." />
+<meta property="og:image" content="https://www.thehealthywave.in/assets/dr-handa.png" />
+<meta property="og:locale" content="en_IN" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://www.thehealthywave.in/assets/dr-handa.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -64,7 +74,7 @@ src="https://www.facebook.com/tr?id=1227039256008469&ev=PageView&noscript=1"
     </nav>
     <div class="nav-cta">
       <a href="tel:+919628591786" onclick="return gtag_report_conversion('tel:+919628591786');" class="nav-tel">+91 96285 91786</a>
-      <a href="#form" class="btn btn-primary">Book an Appointment</a>
+      <a href="/book" class="btn btn-primary">Book an Appointment</a>
       <button class="menu-btn" aria-label="Menu" id="menuBtn"><span></span></button>
     </div>
   </div>
@@ -101,7 +111,7 @@ src="https://www.facebook.com/tr?id=1227039256008469&ev=PageView&noscript=1"
           </div>
           <div class="info-row">
             <span class="glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
-            <div><strong>Working Hours</strong><div class="hours-list"><span>Monday to Saturday: 10:00 AM to 1:00 PM and 6:00 PM to 8:30 PM</span><span>Sunday: Closed (Emergency only)</span></div></div>
+            <div><strong>Working Hours</strong><div class="hours-list"><span>Monday to Saturday: 11:00 AM to 2:00 PM and 6:00 PM to 9:00 PM</span><span>Sunday: Closed (Emergency only)</span></div></div>
           </div>
         </div>
 
@@ -118,47 +128,9 @@ src="https://www.facebook.com/tr?id=1227039256008469&ev=PageView&noscript=1"
 
       <div class="form-card" id="form">
         <h3>Book an Appointment</h3>
-        <p class="subtle">Fill the form below and our team will call you to confirm your appointment.</p>
-        <form id="inquiry" novalidate>
-          <div class="field-row">
-            <div class="field"><label for="name">Full Name</label><input id="name" name="name" type="text" placeholder="Your full name" required /></div>
-            <div class="field"><label for="phone">Phone Number</label><input id="phone" name="phone" type="tel" placeholder="+91 XXXXX XXXXX" required /></div>
-          </div>
-          <div class="field"><label for="email">Email Address</label><input id="email" name="email" type="email" placeholder="you@example.com" /></div>
-          <div class="field">
-            <label for="concern">Your Skin Concern / Service of Interest</label>
-            <select id="concern" name="concern">
-              <option>Not sure &ndash; I want a general checkup</option>
-              <option>Acne and Pimples</option>
-              <option>Scars and Blemishes</option>
-              <option>Melasma and Dark Patches</option>
-              <option>Open Pores and Dull Skin</option>
-              <option>Eczema</option>
-              <option>Tags and Moles</option>
-              <option>Hair Fall and Premature Greying</option>
-              <option>PCOD / Hormonal Skin Issues</option>
-              <option>HIFU</option>
-              <option>Hydrafacial</option>
-              <option>Dermabrasion</option>
-              <option>Other</option>
-            </select>
-          </div>
-          <div class="field-row">
-            <div class="field"><label for="appt-date">Pick a Date</label><input id="appt-date" name="appt_date" type="date" /></div>
-            <div class="field">
-              <label for="appt-time">Pick a Time</label>
-              <select id="appt-time" name="appt_time">
-                <option value="">No preference</option>
-                <option value="Morning (10 AM – 1 PM)">Morning (10 AM &ndash; 1 PM)</option>
-                <option value="Evening (6 PM – 8:30 PM)">Evening (6 PM &ndash; 8:30 PM)</option>
-              </select>
-            </div>
-          </div>
-          <div class="field"><label for="message">Message (Optional)</label><textarea id="message" name="message" rows="4" placeholder="Tell us a little about your concern&hellip;"></textarea></div>
-          <button type="submit">Book Appointment &rarr;</button>
-          <p class="reassure">Your details are kept confidential. We will never share or sell your information.</p>
-          <div class="form-success" id="success" style="display:none;">Thank you &ndash; your booking is confirmed. Our team will reach out to you shortly.</div>
-        </form>
+        <p class="subtle">Pick a date and time that suits you &ndash; it takes about 30 seconds, and you&rsquo;ll see exactly which slots are still open.</p>
+        <a href="/book" class="btn btn-primary" style="width:100%; justify-content:center; min-height:54px; font-size:16px;">Book an Appointment <span class="arrow">&rarr;</span></a>
+        <p class="reassure" style="margin-top:14px;">Prefer to talk to someone? Call us on <a href="tel:+919628591786" onclick="return gtag_report_conversion('tel:+919628591786');" style="border-bottom:1px solid currentColor;">+91 96285 91786</a> during clinic hours.</p>
       </div>
     </div>
   </div>
@@ -174,7 +146,7 @@ src="https://www.facebook.com/tr?id=1227039256008469&ev=PageView&noscript=1"
       <div class="reason"><span class="glyph">1</span><h3>Call Us</h3><p>Speak directly to our team &ndash; fastest way to book an appointment. <br/><a href="tel:+919628591786" onclick="return gtag_report_conversion('tel:+919628591786');" style="border-bottom:1px solid currentColor;">+91 96285 91786</a></p></div>
       <div class="reason"><span class="glyph">2</span><h3>Email</h3><p>For detailed queries or photos of your skin concern.<br/><a href="mailto:hwskinclinic@gmail.com" style="border-bottom:1px solid currentColor;">hwskinclinic@gmail.com</a></p></div>
       <div class="reason"><span class="glyph">3</span><h3>Walk In</h3><p>Visit our Bareilly clinic during working hours. We recommend booking ahead so Dr. Handa can give you focused time.</p></div>
-      <div class="reason"><span class="glyph">4</span><h3>Online Form</h3><p>The form on this page is the easiest way to share your concern in detail. We respond within one business day.</p></div>
+      <div class="reason"><span class="glyph">4</span><h3>Book Online</h3><p>Our <a href="/book" style="border-bottom:1px solid currentColor;">booking page</a> shows live availability &ndash; choose your slot in seconds.</p></div>
     </div>
   </div>
 </section>
@@ -196,58 +168,16 @@ src="https://www.facebook.com/tr?id=1227039256008469&ev=PageView&noscript=1"
 </footer>
 
 <script>
-  const FORM_URL = 'https://script.google.com/macros/s/AKfycbzHN5xUGi-fOuSx8cQW9Xd6wvqNgS2rLAexj9IvJnbwdgpmwKfXcxO9RxSrVUBQvD-mtA/exec';
-
   const mb = document.getElementById('menuBtn');
   const mn = document.getElementById('mobileNav');
   if (mb) mb.addEventListener('click', () => mn.classList.toggle('open'));
-
-  const apptDate = document.getElementById('appt-date');
-  if (apptDate) apptDate.min = new Date().toISOString().split('T')[0];
 
   document.querySelectorAll('a[href^="tel:"]').forEach(function(el) {
     el.addEventListener('click', function() { fbq('track', 'Contact'); });
   });
 
-  const f = document.getElementById('inquiry');
-  if (f) f.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const name = document.getElementById('name').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    if (!name || !phone) { alert('Please share your name and phone number so we can reach you.'); return; }
-
-    const btn = f.querySelector('button[type="submit"]');
-    btn.disabled = true;
-    btn.textContent = 'Sending…';
-
-    const payload = {
-      name,
-      phone,
-      email: document.getElementById('email').value.trim(),
-      concern: document.getElementById('concern').value,
-      appt_date: document.getElementById('appt-date').value,
-      appt_time: document.getElementById('appt-time').value,
-      message: document.getElementById('message').value.trim(),
-    };
-
-    fetch(FORM_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify(payload),
-    })
-      .then(() => {
-        document.getElementById('success').style.display = 'block';
-        fbq('track', 'Lead');
-        f.reset();
-        btn.disabled = false;
-        btn.textContent = 'Book Appointment →';
-      })
-      .catch(() => {
-        alert('Something went wrong. Please call us at +91 96285 91786.');
-        btn.disabled = false;
-        btn.textContent = 'Book Appointment →';
-      });
+  document.querySelectorAll('a[href="/book"]').forEach(function(el) {
+    el.addEventListener('click', function() { fbq('track', 'InitiateCheckout'); });
   });
 </script>
 </body>

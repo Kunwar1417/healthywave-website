@@ -8,6 +8,10 @@
   ],
   "rewrites": [
     {
+      "source": "/book",
+      "destination": "/book.html"
+    },
+    {
       "source": "/desk/",
       "destination": "https://healthywave-desk.fly.dev/"
     },
